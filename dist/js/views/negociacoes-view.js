@@ -30,7 +30,6 @@ export class NegociacoesView {
     // método update será responsável por renderizar o template no elemento que eu capturei através do meu construtor passando o seletor e pegando com o queryselector.
     update(model) {
         const template = this.template(model);
-        console.log(template);
         this.elemento.innerHTML = template;
     }
 }
