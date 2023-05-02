@@ -4,7 +4,7 @@ import { View } from "./view.js";
 export class NegociacoesView extends View<Negociacoes> {
 
     // método template será responsável por declarar o template da minha view.
-    template(model: Negociacoes): string {
+    protected template(model: Negociacoes): string {
         return `
         <table class="table table-hover table-bordered">
             <thead>
@@ -18,7 +18,7 @@ export class NegociacoesView extends View<Negociacoes> {
                 ${model.lista().map(negociacao => {
                     return `
                         <tr>
-                            <td>${new Intl.DateTimeFormat().format(negociacao.data)}</td>
+                            <td>${this.formatar(negociacao.data)}</td>
                             <td>${negociacao.quantidade}</td>
                             <td>${negociacao.valor}</td>   
                         </tr>
@@ -29,9 +29,8 @@ export class NegociacoesView extends View<Negociacoes> {
         `;
     }
 
-    // método update será responsável por renderizar o template no elemento que eu capturei através do meu construtor passando o seletor e pegando com o queryselector.
-    update(model: Negociacoes): void {
-        const template = this.template(model);
-        this.elemento.innerHTML = template; 
-    }
+   private formatar(data: Date): string {
+        return new Intl.DateTimeFormat()
+            .format(data);
+   }
 }
